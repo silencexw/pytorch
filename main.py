@@ -4,7 +4,6 @@ import torch
 import torch.nn as nn
 
 from efficientnet import EfficientNetv2, efficientnetv2_l, efficientnetv2_s
-from googlenet import GoogLeNet
 from net import vgg16
 from torch.utils.data import DataLoader
 from data import *
