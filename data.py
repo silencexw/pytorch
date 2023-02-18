@@ -1,6 +1,7 @@
 import numpy as np
 import torch.utils.data as data
 from PIL import  Image
+from torchvision import transforms
 
 def preprocess_input(x):
     x/=127.5
@@ -25,7 +26,11 @@ class DataGenerator(data.Dataset):
     def __getitem__(self, index):
         annotation_path=self.annotation_lines[index].split(';')[1].split()[0]
         image=Image.open(annotation_path)
-        image=np.transpose(preprocess_input(np.array(image).astype(np.float32)),[2,0,1])
+        #image=self.get_random_data(image,self.input_shape,random=self.random)
+        # resize = transforms.Resize([224, 224])
+        # image= resize(image)
+        image=np.array(image)
+        image=np.transpose(preprocess_input(image.astype(np.float32)),[2,0,1])
         y=int(self.annotation_lines[index].split(';')[0])
         return image,y
     def rand(self,a=0,b=1):
